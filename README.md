@@ -1,8 +1,25 @@
+```
+tensorrt                       10.11.0.33
+tensorrt-cu12                  10.11.0.33
+tensorrt_cu12_bindings         10.11.0.33
+tensorrt_cu12_libs             10.11.0.33
+onnx                           1.20.1
+onnx-graphsurgeon              0.3.27
+onnx-ir                        0.1.16
+onnxoptimizer                  0.3.13
+onnxruntime                    1.15.0
+onnxruntime-gpu                1.14.1
+onnxscript                     0.6.1
+onnxsim                        0.4.28
+version: v1.6.0  •  python: 3.10.8  •  torch: 2.9.1+cu128  •  xformers: 0.0.33+5d4b92a.d20260121  •  gradio: 3.41.2
+blackwell test pass
+```
+
 # TensorRT Extension for Stable Diffusion
 
 This extension enables the best performance on NVIDIA RTX GPUs for Stable Diffusion with TensorRT.
 You need to install the extension and generate optimized engines before using the extension. Please follow the instructions below to set everything up.
-Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, and LCM. For SDXL and SDXL Turbo, we recommend using a GPU with 12 GB or more VRAM for best performance due to its size and computational intensity. 
+Supports Stable Diffusion 1.5,2.1, SDXL, SDXL Turbo, 和 LCM. For SDXL and SDXL Turbo, we recommend using a GPU with 12 GB or more VRAM for best performance due to its size and computational intensity. 
 
 ## Installation
 
@@ -34,7 +51,7 @@ To use LoRA / LyCORIS checkpoints they first need to be converted to a TensorRT 
 ## More Information
 
 TensorRT uses optimized engines for specific resolutions and batch sizes. You can generate as many optimized engines as desired. Types:
-- The "Export Default Engines” selection adds support for resolutions between `512 x 512` and 768x768 for Stable Diffusion 1.5 and 2.1 with batch sizes 1 to 4. For SDXL, this selection generates an engine supporting a resolution of `1024 x 1024` with a batch size of `1`.
+- The "Export Default Engines” selection adds support for resolutions between `512 x 512` and 768x768 for Stable Diffusion 1.5 and 2.1 with batch sizes 1 to 4. For SDXL, this selection generates an engine supporting a resolution of `1024 x 1024` with a batch size of `1`。
 - Static engines support a single specific output resolution and batch size.
 - Dynamic engines support a range of resolutions and batch sizes, at a small cost in performance. Wider ranges will use more VRAM.
 - The first time generating an engine for a checkpoint will take longer. Additional engines generated for the same checkpoint will be much faster. 
