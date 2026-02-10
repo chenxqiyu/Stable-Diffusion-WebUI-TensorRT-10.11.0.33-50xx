@@ -160,7 +160,7 @@ def export_onnx(
             modelobj.get_input_names(),
             modelobj.get_output_names(),
             modelobj.get_dynamic_axes(),
-            modelobj.optimize if not diable_optimizations else None,
+            None,  # Disable optimization to avoid onnx.mapping error
         )
 
 
@@ -172,6 +172,8 @@ def _export_onnx(
     tmp_path = os.path.join(tmp_dir, "model.onnx")
     try:
         info("Exporting to ONNX...")
+        model = model.cuda()
+        inputs = tuple(inp.cuda() if inp is not None else None for inp in inputs)
         with torch.inference_mode(), torch.autocast("cuda"):
             torch.onnx.export(
                 model,
@@ -183,6 +185,7 @@ def _export_onnx(
                 input_names=in_names,
                 output_names=out_names,
                 dynamic_axes=dyn_axes,
+                dynamo=False,
             )
     except Exception as e:
         error("Exporting to ONNX failed. {}".format(e))
