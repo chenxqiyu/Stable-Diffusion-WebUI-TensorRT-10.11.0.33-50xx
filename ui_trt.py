@@ -292,7 +292,10 @@ def get_lora_checkpoints():
 
 
 def get_valid_lora_checkpoints():
-    available_lora_models = get_lora_checkpoints()
+    try:
+        available_lora_models = get_lora_checkpoints()
+    except:
+        available_lora_models = {}
     return [f"{k} ({v['version']})" for k, v in available_lora_models.items()]
 
 
